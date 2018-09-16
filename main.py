@@ -3,71 +3,80 @@ from collections import deque
 from threading import Lock, Thread
 import myo
 import numpy as np
-import scipy.signal as signal
+import scipy.signal as sp
 
 
 class EmgCollector(myo.DeviceListener):
 
+    def __init__(self, n):
+        self.n = n
+        self.lock = Lock()
+        self.emg_data_queue = deque(maxlen=n)
 
-  def __init__(self, n):
-    self.n = n
-    self.lock = Lock()
-    self.emg_data_queue = deque(maxlen=n)
+    def get_emg_data(self):
+        with self.lock:
+            return list(self.emg_data_queue)
 
-  def get_emg_data(self):
-    with self.lock:
-      return list(self.emg_data_queue)
+    # myo.DeviceListener
 
-  # myo.DeviceListener
+    def on_connected(self, event):
+        event.device.stream_emg(True)
 
-  def on_connected(self, event):
-    event.device.stream_emg(True)
-
-  def on_emg(self, event):
-    with self.lock:
-      self.emg_data_queue.append((event.timestamp, event.emg))
+    def on_emg(self, event):
+        with self.lock:
+            self.emg_data_queue.append((event.timestamp, event.emg))
 
 
 class Plot(object):
 
-  def __init__(self, listener):
-    self.n = listener.n
-    self.listener = listener
-    self.fig = plt.figure()
-    self.axes = [self.fig.add_subplot('81' + str(i)) for i in range(1, 9)]
-    [(ax.set_ylim([-100, 100])) for ax in self.axes]
-    self.graphs = [ax.plot(np.arange(self.n), np.zeros(self.n))[0] for ax in self.axes]
-    plt.ion()
-
-  def update_plot(self):
-    emg_data = self.listener.get_emg_data()
-    emg_data = np.array([x[1] for x in emg_data]).T
-    for g, data in zip(self.graphs, emg_data):
-      if len(data) < self.n:
-        # Fill the left side with zeroes.
-        data = np.concatenate([np.zeros(self.n - len(data)), data])
-      data = self.process_data(data)
-      g.set_ydata(data)
-    plt.draw()
-
-  def process_data(self, data):
-    return np.absolute(data)
+    def __init__(self, listener):
+        self.n = listener.n
+        self.listener = listener
+        self.fig = plt.figure()
+        self.axes = [self.fig.add_subplot('81' + str(i)) for i in range(1, 9)]
+        [(ax.set_ylim([-100, 100])) for ax in self.axes]
+        self.graphs = [ax.plot(np.arange(self.n), np.zeros(self.n))[0] for ax in self.axes]
+        plt.ion()
 
 
+    def update_plot(self):
+        emg_data = self.listener.get_emg_data()
+        emg_data = np.array([x[1] for x in emg_data]).T
+        for g, data in zip(self.graphs, emg_data):
+            if len(data) < self.n:
+                # Fill the left side with zeroes.
+                data = np.concatenate([np.zeros(self.n - len(data)), data])
+            data = self.process_data(data)
+            g.set_ydata(data)
+        plt.draw()
 
-  def main(self):
-    while True:
-      self.update_plot()
-      plt.pause(1.0 / 30)
+    def process_data(self, data):
+        # Rectify
+        data = np.absolute(data)
+        # Remove mean
+        data = data - np.mean(data)
+        # Apply fitering
+        b, a = sp.butter(4, 0.5, 'low')
+        output_signal = sp.filtfilt(b, a, data)
+        return output_signal
 
+    def main(self):
+        # root = tk.Tk()
+        # t = TextWindow(root)
+        while True:
+            self.update_plot()
+            plt.pause(1.0 / 30)
+            # Update text view
+            # root.update()
+            # root.update_idletasks()
 
 def main():
-  myo.init()
-  hub = myo.Hub()
-  listener = EmgCollector(512)
-  with hub.run_in_background(listener.on_event):
-    Plot(listener).main()
+    myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
+    hub = myo.Hub()
+    listener = EmgCollector(512)
+    with hub.run_in_background(listener.on_event):
+        Plot(listener).main()
 
 
 if __name__ == '__main__':
-  main()
+    main()
