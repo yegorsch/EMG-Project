@@ -1,9 +1,14 @@
-from matplotlib import pyplot as plt
+from Tkinter import *
 from collections import deque
-from threading import Lock, Thread
+from threading import Lock
+
 import myo
 import numpy as np
 import scipy.signal as sp
+from matplotlib import pyplot as plt
+
+from classifier import Classifier
+from window import TextWindow
 
 
 class EmgCollector(myo.DeviceListener):
@@ -27,9 +32,9 @@ class EmgCollector(myo.DeviceListener):
             self.emg_data_queue.append((event.timestamp, event.emg))
 
 
-class Plot(object):
+class App(object):
 
-    def __init__(self, listener):
+    def __init__(self, listener, classifier=None):
         self.n = listener.n
         self.listener = listener
         self.fig = plt.figure()
@@ -37,6 +42,9 @@ class Plot(object):
         [(ax.set_ylim([-100, 100])) for ax in self.axes]
         self.graphs = [ax.plot(np.arange(self.n), np.zeros(self.n))[0] for ax in self.axes]
         plt.ion()
+
+        self.classifier = classifier
+        self.classes = {1: "INSIDE", 2: "OUTSIDE", 3:"REST"}
 
 
     def update_plot(self):
@@ -60,22 +68,30 @@ class Plot(object):
         output_signal = sp.filtfilt(b, a, data)
         return output_signal
 
-    def main(self):
-        # root = tk.Tk()
-        # t = TextWindow(root)
+    def make_prediction(self):
+        emg_data = self.listener.get_emg_data()
+        emg_data = np.array([x[1] for x in emg_data])
+        return self.classifier.predict(emg_data)
+
+    def main(self, root, tw):
         while True:
             self.update_plot()
             plt.pause(1.0 / 30)
             # Update text view
-            # root.update()
-            # root.update_idletasks()
+            root.update()
+            root.update_idletasks()
+            res = self.make_prediction()
+            tw.set_text(self.classes[res])
+
 
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(512)
+    listener = EmgCollector(128)
+    root = Tk()
+    text_window = TextWindow(root)
     with hub.run_in_background(listener.on_event):
-        Plot(listener).main()
+        App(listener, Classifier("model_3.sav")).main(root, text_window)
 
 
 if __name__ == '__main__':

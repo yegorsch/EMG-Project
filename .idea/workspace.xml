@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7520736-8503-4f7e-a26a-79f3d1901920" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/myo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/myo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+    <list default="true" id="b7520736-8503-4f7e-a26a-79f3d1901920" name="Default" comment="signal processing add">
+      <change afterPath="$PROJECT_DIR$/classifier.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/window.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/myo$main.coverage" NAME="main Coverage Results" MODIFIED="1537103418377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/myo$main.coverage" NAME="main Coverage Results" MODIFIED="1537521916144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/myo$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1537035271737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -37,76 +35,79 @@
     <session id="499574600">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="23" />
+          <entry key="py" value="37" />
+          <entry key="sav" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="23" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2012" />
-          <entry key="txt" value="6" />
+          <entry key="dummy" value="21" />
+          <entry key="py" value="3943" />
+          <entry key="txt" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="2012" />
+          <entry key="PLAIN_TEXT" value="62" />
+          <entry key="Python" value="3943" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="62" column="19" lean-forward="true" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+            <state relative-caret-position="238">
+              <caret line="17" column="27" lean-forward="true" selection-start-line="16" selection-end-line="17" selection-end-column="27" />
               <folding>
-                <element signature="e#1#37#0" expanded="true" />
-                <marker date="1537103451873" expanded="true" signature="1065:1074" ph="..." />
+                <element signature="e#0#36#0" expanded="true" />
+                <marker date="1537522083192" expanded="true" signature="1983:2140" ph="..." />
+                <marker date="1537522083192" expanded="true" signature="2425:2428" ph="..." />
+                <marker date="1537522083192" expanded="true" signature="2439:2444" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/scipy/signal/filter_design.py">
+        <entry file="file:///Library/Python/2.7/site-packages/sklearn/utils/validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="784" selection-start-line="784" selection-end-line="784" />
+            <state relative-caret-position="160">
+              <caret line="440" selection-start-line="440" selection-end-line="440" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/shape_base.py">
+        <entry file="file://$PROJECT_DIR$/classifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/numeric.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="511" selection-start-line="511" selection-end-line="511" />
+            <state relative-caret-position="240">
+              <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1537521680910" expanded="true" signature="78:80" ph="..." />
+                <marker date="1537521680910" expanded="true" signature="114:123" ph="..." />
+                <marker date="1537521680910" expanded="true" signature="641:792" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="15">
+              <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -123,43 +124,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk/Tkinter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="1124" column="21" selection-start-line="1124" selection-start-column="21" selection-end-line="1124" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/backend_bases.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/scipy/signal/__init__.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model_3.sav">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///anaconda/lib/python2.7/site-packages/matplotlib/pyplot.py">
+        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk/Tkinter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="299" selection-start-line="299" selection-end-line="299" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/tight_layout.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="324" selection-start-line="324" selection-end-line="324" />
+            <state relative-caret-position="240">
+              <caret line="2919" column="18" lean-forward="true" selection-start-line="2919" selection-start-column="7" selection-end-line="2919" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -176,6 +150,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>time</find>
+      <find>on_emg</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -186,8 +161,10 @@
       <list>
         <option value="$PROJECT_DIR$/signal_utilities.py" />
         <option value="$PROJECT_DIR$/emg.py" />
-        <option value="$PROJECT_DIR$/window.py" />
+        <option value="$PROJECT_DIR$/classificator.py" />
+        <option value="$PROJECT_DIR$/classifier.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/window.py" />
       </list>
     </option>
   </component>
@@ -197,10 +174,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1440" />
-    <option name="height" value="798" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="718" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -350,6 +326,9 @@
       <module name="myo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -404,6 +383,14 @@
       <option name="presentableId" value="Default" />
       <updated>1536991081420</updated>
     </task>
+    <task id="LOCAL-00001" summary="signal processing add">
+      <created>1537103475901</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1537103475901</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -416,21 +403,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="798" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12446352" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12875536" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" weight="0.32891566" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29886687" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39093485" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2987952" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39036146" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.5679887" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2917847" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.16855524" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -449,6 +437,26 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="signal processing add" />
+    <option name="LAST_COMMIT_MESSAGE" value="signal processing add" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classifier.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Library/Python/2.7/lib/python/site-packages/myo/__init__.py">
@@ -479,40 +487,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ecg.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="46" column="18" lean-forward="true" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/signal_utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/scipy/signal/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk/Tkinter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="1124" column="21" selection-start-line="1124" selection-start-column="21" selection-end-line="1124" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/backend_bases.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ecg.py" />
+    <entry file="file://$PROJECT_DIR$/emg.py" />
+    <entry file="file://$PROJECT_DIR$/signal_utilities.py" />
     <entry file="file://$USER_HOME$/Library/Python/2.7/lib/python/site-packages/cffi/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-449">
@@ -527,61 +504,138 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/scipy/signal/filter_design.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11610">
+          <caret line="784" selection-start-line="784" selection-end-line="784" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2670">
+          <caret line="185" selection-start-line="185" selection-end-line="185" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/shape_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/numeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7530">
+          <caret line="511" selection-start-line="511" selection-end-line="511" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/backend_bases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/scipy/signal/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/collections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="471" column="8" selection-start-line="471" selection-start-column="8" selection-end-line="471" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/sklearn/linear_model/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="323" selection-start-line="323" selection-end-line="323" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/encodings/utf_8.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_comm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="381" selection-start-line="381" selection-end-line="381" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda/lib/python2.7/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="264" selection-start-line="264" selection-end-line="266" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/tight_layout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk/Tkinter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="2919" column="18" lean-forward="true" selection-start-line="2919" selection-start-column="7" selection-end-line="2919" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="440" selection-start-line="440" selection-end-line="440" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1537521680910" expanded="true" signature="78:80" ph="..." />
+            <marker date="1537521680910" expanded="true" signature="114:123" ph="..." />
+            <marker date="1537521680910" expanded="true" signature="641:792" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="27" lean-forward="true" selection-start-line="16" selection-end-line="17" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <marker date="1537522083192" expanded="true" signature="1983:2140" ph="..." />
+            <marker date="1537522083192" expanded="true" signature="2425:2428" ph="..." />
+            <marker date="1537522083192" expanded="true" signature="2439:2444" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="15">
+          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/numeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="511" selection-start-line="511" selection-end-line="511" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/shape_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/scipy/signal/filter_design.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="784" selection-start-line="784" selection-end-line="784" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///anaconda/lib/python2.7/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="299" selection-start-line="299" selection-end-line="299" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/tight_layout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="324" selection-start-line="324" selection-end-line="324" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="62" column="19" lean-forward="true" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
-          <folding>
-            <element signature="e#1#37#0" expanded="true" />
-            <marker date="1537103451873" expanded="true" signature="1065:1074" ph="..." />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/model_3.sav">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
