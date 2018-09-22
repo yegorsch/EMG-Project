@@ -1,0 +1,16 @@
+{
+  "classes": {
+    "1" : "palm_left",
+    "2" : "palm_right",
+    "3" : "palm_rest",
+    "4" : "fist",
+    "5" : "pinky"
+  },
+  "bindings": {
+    "1" : "left",
+    "2" : "right",
+    "3" : "",
+    "4" : "",
+    "5" : ""
+  }
+}

@@ -12,6 +12,8 @@ from window import TextWindow
 
 import pyautogui
 
+import json
+
 class EmgCollector(myo.DeviceListener):
 
     def __init__(self, n):
@@ -35,19 +37,29 @@ class EmgCollector(myo.DeviceListener):
 
 class App(object):
 
-    def __init__(self, listener, classifier=None):
+    def __init__(self, listener, classifier=None, plot=False):
+
         self.n = listener.n
         self.listener = listener
+        self.plot_enable = plot
+
+        if plot:
+            self.setup_plot()
+
+        self.classifier = classifier
+
+        with open('classes.json') as f:
+            data = json.load(f)
+            self.bindings = {int(k): v for k,v in data["bindings"].items()}
+            self.classes = {int(k): v for k,v in data["classes"].items()}
+            self.prev_key = "left"
+
+    def setup_plot(self):
         self.fig = plt.figure()
         self.axes = [self.fig.add_subplot('81' + str(i)) for i in range(1, 9)]
         [(ax.set_ylim([-100, 100])) for ax in self.axes]
         self.graphs = [ax.plot(np.arange(self.n), np.zeros(self.n))[0] for ax in self.axes]
         plt.ion()
-
-        self.classifier = classifier
-        self.classes = {1: "left", 2: "right", 3:"REST"} #3 - rest
-        self.prev_key = "left"
-
 
     def update_plot(self):
         emg_data = self.listener.get_emg_data()
@@ -59,6 +71,7 @@ class App(object):
             data = self.process_data(data)
             g.set_ydata(data)
         plt.draw()
+        plt.pause(1/30.0)
 
     def process_data(self, data):
         # Rectify
@@ -77,8 +90,8 @@ class App(object):
 
     def main(self, root, tw):
         while True:
-            # self.update_plot()
-            # plt.pause(1.0 / 30)
+            if self.plot_enable:
+                self.update_plot()
             # Update text view
             self.update_tk(root)
             res = self.make_prediction()
@@ -91,12 +104,12 @@ class App(object):
 
     def handle_direction(self, value):
         if value == 3:
-            pyautogui.keyUp("left")
-            pyautogui.keyUp("right")
-        if self.classes[value] != self.prev_key:
+            pyautogui.keyUp(self.prev_key)
+            self.prev_key = ""
+        elif self.bindings[value] != self.prev_key:
             pyautogui.keyUp(self.prev_key)  # Release previous key
-            self.prev_key = self.classes[value]  # Update prev key to new key
-            pyautogui.keyDown(self.classes[value])  # Press new key
+            self.prev_key = self.bindings[value]  # Update prev key to new key
+            pyautogui.keyDown(self.bindings[value])  # Press new key
 
 
 def main():
