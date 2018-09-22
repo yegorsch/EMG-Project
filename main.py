@@ -10,6 +10,7 @@ from matplotlib import pyplot as plt
 from classifier import Classifier
 from window import TextWindow
 
+import pyautogui
 
 class EmgCollector(myo.DeviceListener):
 
@@ -44,7 +45,8 @@ class App(object):
         plt.ion()
 
         self.classifier = classifier
-        self.classes = {1: "INSIDE", 2: "OUTSIDE", 3:"REST"}
+        self.classes = {1: "left", 2: "right", 3:"REST"} #3 - rest
+        self.prev_key = "left"
 
 
     def update_plot(self):
@@ -75,24 +77,36 @@ class App(object):
 
     def main(self, root, tw):
         while True:
-            self.update_plot()
-            plt.pause(1.0 / 30)
+            # self.update_plot()
+            # plt.pause(1.0 / 30)
             # Update text view
-            root.update()
-            root.update_idletasks()
+            self.update_tk(root)
             res = self.make_prediction()
             tw.set_text(self.classes[res])
+            self.handle_direction(res)
+
+    def update_tk(self, root):
+        root.update()
+        root.update_idletasks()
+
+    def handle_direction(self, value):
+        if value == 3:
+            pyautogui.keyUp("left")
+            pyautogui.keyUp("right")
+        if self.classes[value] != self.prev_key:
+            pyautogui.keyUp(self.prev_key)  # Release previous key
+            self.prev_key = self.classes[value]  # Update prev key to new key
+            pyautogui.keyDown(self.classes[value])  # Press new key
 
 
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(128)
+    listener = EmgCollector(48)
     root = Tk()
     text_window = TextWindow(root)
     with hub.run_in_background(listener.on_event):
         App(listener, Classifier("model_3.sav")).main(root, text_window)
-
 
 if __name__ == '__main__':
     main()

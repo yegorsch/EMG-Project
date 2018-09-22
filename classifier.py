@@ -19,7 +19,6 @@ class Model:
             return 3
         y_test = self.model.predict(np.abs(X_test))
         data_counter = Counter(y_test)
-        #print("NARUZHU" if data_counter.most_common(1)[0][0] == 2 else "VNUTR")
         return data_counter.most_common(1)[0][0]
 
 class Classifier:
