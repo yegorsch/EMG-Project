@@ -34,6 +34,10 @@ class EmgCollector(myo.DeviceListener):
         with self.lock:
             self.emg_data_queue.append((event.timestamp, event.emg))
 
+    # def on_orientation(self, event):
+    #     with self.lock:
+    #         print(event.acceleration)
+
 
 class App(object):
 
@@ -119,7 +123,7 @@ def main():
     root = Tk()
     text_window = TextWindow(root)
     with hub.run_in_background(listener.on_event):
-        App(listener, Classifier("model_3.sav")).main(root, text_window)
+        App(listener, Classifier("model_3.sav"), plot=False).main(root, text_window)
 
 if __name__ == '__main__':
     main()
