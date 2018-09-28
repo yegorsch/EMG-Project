@@ -123,7 +123,7 @@ def main():
     root = Tk()
     text_window = TextWindow(root)
     with hub.run_in_background(listener.on_event):
-        App(listener, Classifier("model_3.sav"), plot=False).main(root, text_window)
+        App(listener, Classifier("model_5.sav"), plot=False).main(root, text_window)
 
 if __name__ == '__main__':
     main()
