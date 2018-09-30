@@ -7,7 +7,7 @@ import numpy as np
 import scipy.signal as sp
 from matplotlib import pyplot as plt
 
-from classifier import Classifier
+from classifier import Classifier, Regressor
 from window import TextWindow
 
 import pyautogui
@@ -41,7 +41,7 @@ class EmgCollector(myo.DeviceListener):
 
 class App(object):
 
-    def __init__(self, listener, classifier=None, plot=False):
+    def __init__(self, listener, classifier=None, regressor=None, plot=False):
 
         self.n = listener.n
         self.listener = listener
@@ -51,6 +51,7 @@ class App(object):
             self.setup_plot()
 
         self.classifier = classifier
+        self.regressor = regressor
 
         with open('classes.json') as f:
             data = json.load(f)
@@ -92,14 +93,21 @@ class App(object):
         emg_data = np.array([x[1] for x in emg_data])
         return self.classifier.predict(emg_data)
 
+    def get_cont_data(self):
+        emg_data = self.listener.get_emg_data()
+        emg_data = np.array([x[1] for x in emg_data])
+        return self.regressor.predict(emg_data)
+        
+
     def main(self, root, tw):
         while True:
             if self.plot_enable:
                 self.update_plot()
+            cont_data = self.get_cont_data()
             # Update text view
             self.update_tk(root)
             res = self.make_prediction()
-            tw.set_text(self.classes[res])
+            tw.set_text(str(cont_data))
             self.handle_direction(res)
 
     def update_tk(self, root):
@@ -123,7 +131,7 @@ def main():
     root = Tk()
     text_window = TextWindow(root)
     with hub.run_in_background(listener.on_event):
-        App(listener, Classifier("model_5.sav"), plot=False).main(root, text_window)
+        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/krr2.sav"), plot=False).main(root, text_window)
 
 if __name__ == '__main__':
     main()
