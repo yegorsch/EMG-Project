@@ -8,7 +8,7 @@ import scipy.signal as sp
 from matplotlib import pyplot as plt
 
 from classifier import Classifier, Regressor
-from window import TextWindow
+from window import TextWindow, CircleWindow
 
 import pyautogui
 
@@ -41,30 +41,36 @@ class EmgCollector(myo.DeviceListener):
 
 class App(object):
 
-    def __init__(self, listener, classifier=None, regressor=None, plot=False):
+    def __init__(self, listener, classifier=None, regressor=None, emg_plot=False, reg_plot=False):
 
         self.n = listener.n
         self.listener = listener
-        self.plot_enable = plot
+        self.emg_plot = emg_plot
+        self.reg_plot = reg_plot
 
-        if plot:
-            self.setup_plot()
+        if emg_plot:
+            self.fig = plt.figure()
+            self.axes = [self.fig.add_subplot('81' + str(i)) for i in range(1, 9)]
+            [(ax.set_ylim([-100, 100])) for ax in self.axes]
+            self.graphs = [ax.plot(np.arange(self.n), np.zeros(self.n))[0] for ax in self.axes]
+            plt.ion()
+        if reg_plot:
+            self.fig = plt.figure()
+            self.axis = self.fig.add_subplot(111)
+            print(self.n)
+            self.graph = self.axis.plot(np.arange(self.n), np.zeros(self.n))[0]
+            plt.ion()
+
+
 
         self.classifier = classifier
         self.regressor = regressor
-
+        
         with open('classes.json') as f:
             data = json.load(f)
             self.bindings = {int(k): v for k,v in data["bindings"].items()}
             self.classes = {int(k): v for k,v in data["classes"].items()}
             self.prev_key = "left"
-
-    def setup_plot(self):
-        self.fig = plt.figure()
-        self.axes = [self.fig.add_subplot('81' + str(i)) for i in range(1, 9)]
-        [(ax.set_ylim([-100, 100])) for ax in self.axes]
-        self.graphs = [ax.plot(np.arange(self.n), np.zeros(self.n))[0] for ax in self.axes]
-        plt.ion()
 
     def update_plot(self):
         emg_data = self.listener.get_emg_data()
@@ -77,6 +83,14 @@ class App(object):
             g.set_ydata(data)
         plt.draw()
         plt.pause(1/30.0)
+
+    def update_reg_plot(self, ys):
+        if ys == None:
+            return
+        self.axis.clear()
+        self.axis.plot(ys)
+        plt.draw()
+        plt.pause(1/15.0)
 
     def process_data(self, data):
         # Rectify
@@ -101,14 +115,17 @@ class App(object):
 
     def main(self, root, tw):
         while True:
-            if self.plot_enable:
+            if self.emg_plot:
                 self.update_plot()
             cont_data = self.get_cont_data()
+            if self.reg_plot:
+                self.update_reg_plot(cont_data)
             # Update text view
             self.update_tk(root)
-            res = self.make_prediction()
-            tw.set_text(str(cont_data))
-            self.handle_direction(res)
+            tw.set_text(str(np.max(cont_data)))
+
+            #res = self.make_prediction()
+            #self.handle_direction(res)
 
     def update_tk(self, root):
         root.update()
@@ -127,11 +144,14 @@ class App(object):
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(48)
+    listener = EmgCollector(60)
     root = Tk()
+
     text_window = TextWindow(root)
+
+    # circle_window = CircleWindow(root)
     with hub.run_in_background(listener.on_event):
-        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/krr2.sav"), plot=False).main(root, text_window)
+        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/krr.sav"), reg_plot=True).main(root, text_window)
 
 if __name__ == '__main__':
     main()

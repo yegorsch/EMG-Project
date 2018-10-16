@@ -25,6 +25,17 @@ class RegressorModel:
 
     def __init__(self, file_name):
         self.model = pickle.load(open(file_name, 'rb'))
+        self.wind_size = 10
+
+    def filter(self, emg):
+        N = len(emg)
+        i_start = range(1, N - self.wind_size)
+        i_stop = range(self.wind_size, N)
+        EMG_av = np.zeros((N - self.wind_size, 8))
+        for i in range(N - 5 - self.wind_size):
+            sample = np.mean(emg[i_start[i]:i_stop[i], :], axis=0)
+            EMG_av[i, :] = sample
+        return EMG_av
 
     def predict(self, emg):
         """
@@ -32,19 +43,14 @@ class RegressorModel:
         :param X_test:
         :return: Most common class value.
         """
-        if len(emg) == 0:
+        if len(emg) < 16:
             return
-        emg = np.array([x[1] for x in emg]).T
-        b, a = sp.butter(4, 0.2, 'low')
-        filtered_channels = []
-        for i in range(8):
-            channel_data = emg[:, i]
-            filtered_channel = sp.filtfilt(b, a, channel_data)
-            filtered_channels.append(filtered_channel)
-        for i in range(8):
-            emg[:, i] = filtered_channels[i]
-
+        emg = np.abs(emg)
+        if len(emg) < self.wind_size:
+            return 0
+        emg = self.filter(emg).reshape(-1, 1)
         ys = self.model.predict(emg)
+        # avg = np.mean(ys)
         return ys
 
 class Classifier:
