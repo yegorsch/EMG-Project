@@ -25,7 +25,7 @@ class RegressorModel:
 
     def __init__(self, file_name):
         self.model = pickle.load(open(file_name, 'rb'))
-        self.wind_size = 10
+        self.wind_size = 60
 
     def filter(self, emg):
         N = len(emg)
@@ -44,11 +44,11 @@ class RegressorModel:
         :return: Most common class value.
         """
         if len(emg) < 16:
-            return
+            return None
         emg = np.abs(emg)
         if len(emg) < self.wind_size:
-            return 0
-        emg = self.filter(emg).reshape(-1, 1)
+            return None
+        emg = self.filter(emg)
         ys = self.model.predict(emg)
         # avg = np.mean(ys)
         return ys

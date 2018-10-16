@@ -90,7 +90,7 @@ class App(object):
         self.axis.clear()
         self.axis.plot(ys)
         plt.draw()
-        plt.pause(1/15.0)
+        plt.pause(1/30.0)
 
     def process_data(self, data):
         # Rectify
@@ -109,21 +109,26 @@ class App(object):
 
     def get_cont_data(self):
         emg_data = self.listener.get_emg_data()
+        if len(emg_data) == 0:
+            return
         emg_data = np.array([x[1] for x in emg_data])
         return self.regressor.predict(emg_data)
         
 
-    def main(self, root, tw):
+    def main(self, root, tw, cw):
         while True:
             if self.emg_plot:
                 self.update_plot()
             cont_data = self.get_cont_data()
+            if cont_data == None:
+                continue
             if self.reg_plot:
                 self.update_reg_plot(cont_data)
             # Update text view
             self.update_tk(root)
-            tw.set_text(str(np.max(cont_data)))
-
+            mean = np.mean(cont_data)
+            tw.set_text(str(mean))
+            cw.move_circle(mean)
             #res = self.make_prediction()
             #self.handle_direction(res)
 
@@ -144,14 +149,14 @@ class App(object):
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(60)
+    listener = EmgCollector(200)
     root = Tk()
 
     text_window = TextWindow(root)
 
-    # circle_window = CircleWindow(root)
+    circle_window = CircleWindow(root)
     with hub.run_in_background(listener.on_event):
-        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/krr.sav"), reg_plot=True).main(root, text_window)
+        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/rbf.sav"), reg_plot=True).main(root, text_window, circle_window)
 
 if __name__ == '__main__':
     main()

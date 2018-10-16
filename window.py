@@ -25,9 +25,20 @@ class CircleWindow:
         self.width= 300
         self.canvas = tk.Canvas(root, height=self.height, width=self.height)
         # canvas.delete("all")
-        self.draw_circle()
-
-    def draw_circle(self):
-        arc = self.canvas.create_oval(0, 0, 40, 40)
-
+        self.initialCoords = [150, 30, 180, 60]
+        self.canvas.create_oval(self.initialCoords)
         self.canvas.pack()
+
+    def move_circle(self, by):
+        if by < 0.5:
+            by = -by - 2
+        else:
+            by += 2
+        self.initialCoords = [self.initialCoords[0] + by, self.initialCoords[1], self.initialCoords[2] + by, self.initialCoords[3] + by]
+        self.canvas.delete("all")
+        self.canvas.create_oval(self.initialCoords)
+
+
+
+    #def draw_circle(self):
+
