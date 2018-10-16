@@ -18,25 +18,27 @@ class TextWindow:
 class CircleWindow:
 
     def __init__(self, root):
-        self.max = 2
-        self.min = 0.5
         self.master = root
         self.height = 250
-        self.width= 300
+        self.width= 500
+        self.radius = 30
         self.canvas = tk.Canvas(root, height=self.height, width=self.height)
         # canvas.delete("all")
         self.initialCoords = [150, 30, 180, 60]
         self.canvas.create_oval(self.initialCoords)
         self.canvas.pack()
-
+    #
+    # def _create_circle(self, x, y, r, **kwargs):
+    #     return self.create_oval(x - r, y - r, x + r, y + r, **kwargs)
     def move_circle(self, by):
-        if by < 0.5:
-            by = -by - 2
-        else:
-            by += 2
-        self.initialCoords = [self.initialCoords[0] + by, self.initialCoords[1], self.initialCoords[2] + by, self.initialCoords[3] + by]
+        x = self.width * by
+        # x0 = anchor
+        # y0 = 0
+        # x1 = anchor + self.radius * 2
+        # y1 = x1 + self.radius * 2
+        y = 40
         self.canvas.delete("all")
-        self.canvas.create_oval(self.initialCoords)
+        self.canvas.create_oval([x - self.radius, y - self.radius, x + self.radius, y + self.radius])
 
 
 

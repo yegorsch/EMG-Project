@@ -57,6 +57,7 @@ class App(object):
         if reg_plot:
             self.fig = plt.figure()
             self.axis = self.fig.add_subplot(111)
+            # self.axis.set_ylim(top=1)
             print(self.n)
             self.graph = self.axis.plot(np.arange(self.n), np.zeros(self.n))[0]
             plt.ion()
@@ -149,7 +150,7 @@ class App(object):
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(200)
+    listener = EmgCollector(100)
     root = Tk()
 
     text_window = TextWindow(root)
