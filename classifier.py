@@ -25,7 +25,7 @@ class RegressorModel:
 
     def __init__(self, file_name):
         self.model = pickle.load(open(file_name, 'rb'))
-        self.wind_size = 20
+        self.wind_size = 60
 
     def filter(self, emg):
         N = len(emg)

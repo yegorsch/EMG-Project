@@ -150,7 +150,7 @@ class App(object):
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(200)
+    listener = EmgCollector(400)
     root = Tk()
 
     text_window = TextWindow(root)
