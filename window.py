@@ -19,10 +19,10 @@ class CircleWindow:
 
     def __init__(self, root):
         self.master = root
-        self.height = 250
+        self.height = 500
         self.width= 500
-        self.radius = 30
-        self.canvas = tk.Canvas(root, height=self.height, width=self.height)
+        self.radius = 20
+        self.canvas = tk.Canvas(root, height=self.height, width=self.height, background="black")
         # canvas.delete("all")
         self.initialCoords = [150, 30, 180, 60]
         self.canvas.create_oval(self.initialCoords)
@@ -31,14 +31,11 @@ class CircleWindow:
     # def _create_circle(self, x, y, r, **kwargs):
     #     return self.create_oval(x - r, y - r, x + r, y + r, **kwargs)
     def move_circle(self, by):
+        by = 1 - by
         x = self.width * by
-        # x0 = anchor
-        # y0 = 0
-        # x1 = anchor + self.radius * 2
-        # y1 = x1 + self.radius * 2
-        y = 40
+        y = self.height / 2 + self.radius
         self.canvas.delete("all")
-        self.canvas.create_oval([x - self.radius, y - self.radius, x + self.radius, y + self.radius])
+        self.canvas.create_oval([x - self.radius, y - self.radius, x + self.radius, y + self.radius], outline="white", fill="white")
 
 
 

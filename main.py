@@ -150,14 +150,14 @@ class App(object):
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(100)
+    listener = EmgCollector(200)
     root = Tk()
 
     text_window = TextWindow(root)
 
     circle_window = CircleWindow(root)
     with hub.run_in_background(listener.on_event):
-        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/rbf.sav"), reg_plot=True).main(root, text_window, circle_window)
+        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/rbf.sav"), reg_plot=False).main(root, text_window, circle_window)
 
 if __name__ == '__main__':
     main()
