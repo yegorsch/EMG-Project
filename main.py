@@ -116,7 +116,7 @@ class App(object):
         return self.regressor.predict(emg_data)
         
 
-    def main(self, root, tw, cw):
+    def main(self, root, tw, cw=None):
         while True:
             if self.emg_plot:
                 self.update_plot()
@@ -130,8 +130,9 @@ class App(object):
             mean = np.mean(cont_data)
             tw.set_text(str(mean))
             cw.move_circle(mean)
-            #res = self.make_prediction()
-            #self.handle_direction(res)
+            # res = self.make_prediction()
+            # print(res)
+            # self.handle_direction(res)
 
     def update_tk(self, root):
         root.update()
@@ -150,14 +151,15 @@ class App(object):
 def main():
     myo.init(sdk_path='/Users/egor/Documents/University/myo_sdk')
     hub = myo.Hub()
-    listener = EmgCollector(400)
+    listener = EmgCollector(40)
     root = Tk()
 
     text_window = TextWindow(root)
 
     circle_window = CircleWindow(root)
+
     with hub.run_in_background(listener.on_event):
-        App(listener, classifier=Classifier("Models/model_3.sav"), regressor=Regressor("Models/rbf.sav"), reg_plot=False).main(root, text_window, circle_window)
+        App(listener, classifier=Classifier("Models/model_5.sav"), regressor=Regressor("Models/rbf.sav"), reg_plot=False, emg_plot=False).main(root, text_window,circle_window )
 
 if __name__ == '__main__':
     main()
