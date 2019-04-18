@@ -120,19 +120,20 @@ class App(object):
         while True:
             if self.emg_plot:
                 self.update_plot()
-            cont_data = self.get_cont_data()
-            if cont_data == None:
-                continue
-            if self.reg_plot:
-                self.update_reg_plot(cont_data)
-            # Update text view
+            if self.regressor:
+                cont_data = self.get_cont_data()
+                if cont_data is None:
+                    continue
+                if self.reg_plot:
+                    self.update_reg_plot(cont_data)
+                mean = np.mean(cont_data)
+                tw.set_text(str(mean))
+                cw.move_circle(mean)
+                # Update text view
             self.update_tk(root)
-            mean = np.mean(cont_data)
-            tw.set_text(str(mean))
-            cw.move_circle(mean)
-            # res = self.make_prediction()
-            # print(res)
-            # self.handle_direction(res)
+            res = self.make_prediction()
+            print(self.classes[res], res)
+            self.handle_direction(res)
 
     def update_tk(self, root):
         root.update()
@@ -159,7 +160,7 @@ def main():
     circle_window = CircleWindow(root)
 
     with hub.run_in_background(listener.on_event):
-        App(listener, classifier=Classifier("Models/model_5.sav"), regressor=Regressor("Models/rbf.sav"), reg_plot=False, emg_plot=False).main(root, text_window,circle_window )
+        App(listener, classifier=Classifier("Models/simple_logistic.sav"), regressor=None, reg_plot=False, emg_plot=False).main(root, text_window,circle_window )
 
 if __name__ == '__main__':
     main()

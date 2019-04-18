@@ -43,7 +43,7 @@ class RegressorModel:
         :param X_test:
         :return: Most common class value.
         """
-        if emg is None or emg == None or len(emg) < self.wind_size:
+        if len(emg) < self.wind_size:
             return None
         emg = np.abs(emg)
         emg = self.filter(emg)
